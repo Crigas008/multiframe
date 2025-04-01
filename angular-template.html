@@ -1,0 +1,56 @@
+<div ng-controller="MainCtrl">
+    <h2>Angular App</h2>
+    <div>
+        <input 
+            type="text" 
+            ng-model="newTodo.text" 
+            ng-keyup="$event.keyCode === 13 && addTodo()" 
+            placeholder="Заголовок"
+        >
+        <input
+            type="text"
+            ng-model="newTodo.description"
+            placeholder="Описание"
+        >
+        <input
+            type="date"
+            ng-model="newTodo.date"
+        >
+        <button ng-click="addTodo()">Добавить</button>
+    </div>
+    <ul>
+        <li ng-repeat="todo in todos" ng-class="{'completed': todo.completed}">
+            <div>
+                <strong>{{todo.text}}</strong>
+                <p>{{todo.description}}</p>
+                <small>{{todo.date}}</small>
+                <img ng-src="{{todo.imageUrl}}" ng-if="todo.imageUrl" class="todo-image">
+            </div>
+            <div class="todo-actions">
+                <button ng-click="toggleComplete(todo.id)">
+                    {{todo.completed ? 'Восстановить' : 'Завершить'}}
+                </button>
+                <button ng-click="fetchRandomImage(todo.id)">Изображение</button>
+                <button ng-click="removeTodo(todo.id)">Удалить</button>
+            </div>
+        </li>
+    </ul>
+    
+    <h3>Latest Posts (100)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Body</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="post in posts">
+                <td>{{post.id}}</td>
+                <td>{{post.title}}</td>
+                <td>{{post.body}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

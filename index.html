@@ -27,41 +27,31 @@
     <div id="react-app" class="app-container" style="display: none"></div>
 
     <!-- Angular Container -->
-    <div id="angular-app" class="app-container" ng-app="myApp" style="display: none">
-        <div ng-controller="MainCtrl">
-            <h2>Angular App</h2>
-            <div>
-                <input 
-                    type="text" 
-                    ng-model="newTodo" 
-                    ng-keyup="$event.keyCode === 13 && addTodo()" 
-                    placeholder="New todo"
-                >
-                <button ng-click="addTodo()">Add Todo</button>
-            </div>
-            <ul>
-                <li ng-repeat="todo in todos">{{ todo }}</li>
-            </ul>
-            
-            <div class="clicker">
-                <button ng-click="incrementClick()">Click me! {{ clickCount }}</button>
-            </div>
-            
-            <h3>Latest Posts</h3>
-            <table>
-                <tr ng-repeat="post in posts | limitTo:5">
-                    <td>{{ post.title }}</td>
-                </tr>
-            </table>
-        </div>
+    <div id="angular-app" class="app-container" style="display: none">
+        <div ng-include="'angular-template.html'"></div>
     </div>
+
     <script>
+        // Инициализация Angular при загрузке
+        angular.module('myApp', ['ngSanitize']);
+        
         function showFramework(framework) {
             ['vue-app', 'react-app', 'angular-app'].forEach(id => {
                 document.getElementById(id).style.display = 'none';
             });
-            document.getElementById(`${framework}-app`).style.display = 'block';
+            const activeApp = document.getElementById(`${framework}-app`);
+            activeApp.style.display = 'block';
+            
+            // Ручная инициализация Angular при первом показе
+            if (framework === 'angular' && !angular.element(activeApp).scope()) {
+                angular.bootstrap(activeApp, ['myApp']);
+            }
         }
+        
+        // Показываем React по умолчанию
+        document.addEventListener('DOMContentLoaded', function() {
+            showFramework('react');
+        });
     </script>
 
     <script src="vue-app.js"></script>
