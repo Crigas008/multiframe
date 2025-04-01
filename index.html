@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multi-Framework App</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- React -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-sanitize.js"></script>
+</head>
+<body>
+    <div class="framework-switcher">
+        <button onclick="showFramework('vue')">Vue</button>
+        <button onclick="showFramework('react')">React</button>
+        <button onclick="showFramework('angular')">Angular</button>
+    </div>
+
+    <!-- Vue Container -->
+    <div id="vue-app" class="app-container" style="display: none"></div>
+
+    <!-- React Container -->
+    <div id="react-app" class="app-container" style="display: none"></div>
+
+    <!-- Angular Container -->
+    <div id="angular-app" class="app-container" ng-app="myApp" style="display: none">
+        <div ng-controller="MainCtrl">
+            <h2>Angular App</h2>
+            <div>
+                <input 
+                    type="text" 
+                    ng-model="newTodo" 
+                    ng-keyup="$event.keyCode === 13 && addTodo()" 
+                    placeholder="New todo"
+                >
+                <button ng-click="addTodo()">Add Todo</button>
+            </div>
+            <ul>
+                <li ng-repeat="todo in todos">{{ todo }}</li>
+            </ul>
+            
+            <div class="clicker">
+                <button ng-click="incrementClick()">Click me! {{ clickCount }}</button>
+            </div>
+            
+            <h3>Latest Posts</h3>
+            <table>
+                <tr ng-repeat="post in posts | limitTo:5">
+                    <td>{{ post.title }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        function showFramework(framework) {
+            ['vue-app', 'react-app', 'angular-app'].forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+            document.getElementById(`${framework}-app`).style.display = 'block';
+        }
+    </script>
+
+    <script src="vue-app.js"></script>
+    <script type="text/babel" src="react-app.js"></script>
+    <script src="angular-app.js"></script>
+</body>
+</html>
