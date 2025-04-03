@@ -2,7 +2,7 @@
   "name": "poject",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Crigas008/multiframe",
+  "homepage": "https://crigas008.github.io/multiframe",
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@testing-library/dom": "^10.4.0",
