@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Crigas008/multiframe/static/css/main.78609851.css",
+    "main.js": "/Crigas008/multiframe/static/js/main.bd1e34b0.js",
+    "index.html": "/Crigas008/multiframe/index.html",
+    "main.78609851.css.map": "/Crigas008/multiframe/static/css/main.78609851.css.map",
+    "main.bd1e34b0.js.map": "/Crigas008/multiframe/static/js/main.bd1e34b0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.78609851.css",
+    "static/js/main.bd1e34b0.js"
+  ]
+}
