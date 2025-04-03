@@ -21,19 +21,19 @@ const FALLBACK_DATA = {
     popularity: {
         react: {
             usage: 0.82,
-            satisfaction: 0.89,
+            satisfaction: 0.7,
             githubStars: 217000,
             companies: ['Facebook', 'Airbnb', 'Netflix']
         },
         vue: {
-            usage: 0.73,
-            satisfaction: 0.91,
+            usage: 0.51,
+            satisfaction: 0.7,
             githubStars: 206000,
             companies: ['Alibaba', 'Xiaomi', 'GitLab']
         },
         angular: {
-            usage: 0.54,
-            satisfaction: 0.65,
+            usage: 0.49,
+            satisfaction: 0.37,
             githubStars: 92000,
             companies: ['Google', 'Microsoft', 'IBM']
         }
