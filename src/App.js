@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ErrorBoundary } from './ErrorBoundary';
 import { fetchComparisonData } from './api';
 import './App.css';
+import {AnimationDemo, DynamicListDemo, InteractiveFormDemo} from "./DynamicDemos";
 
 const App = () => {
     const [data, setData] = useState(null);
@@ -34,9 +35,21 @@ const App = () => {
 
                 <nav className="navigation">
                     {['performance', 'usability', 'popularity', 'use-cases'].map((id) => (
-                        <a key={id} href={`#${id}`} className="nav-link">
+                        <a
+                            key={id}
+                            href={`#${id}`}
+                            className="nav-link"
+                            onClick={(e) => {
+                                // Плавный скролл для мобильных устройств
+                                e.preventDefault();
+                                document.querySelector(`#${id}`).scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }}
+                        >
                             {{
-                                'performance': '⚡ Производительность',
+                                'performance': '⚡ Произв.',
                                 'usability': '🎯 Удобство',
                                 'popularity': '📈 Популярность',
                                 'use-cases': '💼 Применение'
@@ -52,8 +65,8 @@ const App = () => {
                         data={data?.performance}
                         render={(item) => (
                             <>
-                                <DataRow label="Время обновления:" value={item.updateTime} />
-                                <DataRow label="Потребление памяти:" value={item.memory} />
+                                <DataRow label="Время обновления:" value={item.updateTime}/>
+                                <DataRow label="Потребление памяти:" value={item.memory}/>
                             </>
                         )}
                     />
@@ -64,8 +77,8 @@ const App = () => {
                         data={data?.usability}
                         render={(item) => (
                             <>
-                                <DataRow label="Кривая обучения:" value={item.learningCurve} />
-                                <DataRow label="Настройка проекта:" value={item.projectSetup} />
+                                <DataRow label="Кривая обучения:" value={item.learningCurve}/>
+                                <DataRow label="Настройка проекта:" value={item.projectSetup}/>
                             </>
                         )}
                     />
@@ -103,10 +116,34 @@ const App = () => {
                         data={data?.useCases}
                         render={(item) => <p className="use-case">{item.description}</p>}
                     />
+                    <Section
+                        id="dynamic-examples"
+                        title="Примеры динамических интерфейсов"
+                        data={{react: {}, vue: {}, angular: {}}}
+                        render={() => (
+                            <div className="dynamic-demos">
+                                <div className="demo-card">
+                                    <h3>Интерактивный список</h3>
+                                    <DynamicListDemo/>
+                                </div>
+
+                                <div className="demo-card">
+                                    <h3>Анимации</h3>
+                                    <AnimationDemo/>
+                                </div>
+
+                                <div className="demo-card">
+                                    <h3>Динамическая форма</h3>
+                                    <InteractiveFormDemo/>
+                                </div>
+                            </div>
+                        )}
+                    />
 
                     <div className="hypothesis">
                         <h2>Гипотеза проекта</h2>
-                        <p>Создание веб-сайта на фреймворке позволяет наглядно демонстрировать его отличия, что упрощает выбор технологии для начинающих разработчиков.</p>
+                        <p>Создание веб-сайта на фреймворке позволяет наглядно демонстрировать его отличия, что упрощает
+                            выбор технологии для начинающих разработчиков.</p>
                     </div>
                 </main>
             </div>
@@ -114,7 +151,7 @@ const App = () => {
     );
 };
 
-const Section = ({ id, title, data, render }) => {
+const Section = ({id, title, data, render}) => {
     if (!data || Object.keys(data).length === 0) return null;
 
     return (
