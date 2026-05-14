@@ -3,18 +3,10 @@ vless://3dc21192-adc6-495d-aa99-505a866b7fc8@45.91.52.42:21411?encryption=none&p
 
 
 
-toolbox enter
-sudo dnf install -y alien wget
-wget github.com
-
-
-
-sudo alien --to-rpm Throne-1.1.2-debian-amd64.deb
-mv throne-*.rpm ~/
-exit
-
-rpm-ostree install ~/throne-*.rpm
-systemctl reboot
+unzip Throne-*-linux-amd64.zip
+cd Throne*
+chmod +x Throne
+./Throne
 
 
 # dependencies
